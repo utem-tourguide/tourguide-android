@@ -15,4 +15,5 @@ Proximamente
 
 ## Autores
 
-* [Daniel](https://github.com/Dannypein)
+* [Kevin Perez](https://github.com/kevindperezm)
+* [Daniel Dolores](https://github.com/Dannypein)

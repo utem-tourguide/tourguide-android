@@ -13,6 +13,6 @@ Proximamente
 
 Proximamente
 
-##Autores
+## Autores
 
-* [Daniel] (https://github.com/Dannypein)
+* [Daniel](https://github.com/Dannypein)

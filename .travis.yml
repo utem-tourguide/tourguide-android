@@ -4,6 +4,9 @@ before_install:
   - chmod +x gradlew
   - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
+  # crear e iniciar un emulador
+  - echo no | android create avd --force -n test -t android-22 --abi x86
+  - emulator -avd test -no-skin -no-audio -no-window &
 
 android:
   components:

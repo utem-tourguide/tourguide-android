@@ -1,0 +1,15 @@
+language: android
+
+android:
+  components:
+    - platform-tools
+    - tools
+
+    # versión build-tools para compilar
+    - build-tools-22.0.1
+    # api para compilar
+    - android-22
+
+    # imágenes para probar en ellas
+    - sys-img-x86-android-22
+

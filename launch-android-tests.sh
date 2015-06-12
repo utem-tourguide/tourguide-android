@@ -1,4 +1,5 @@
 #! /bin/bash
+set -e
 
 ANDROID_APIS=(15 16 19 21 22)
 

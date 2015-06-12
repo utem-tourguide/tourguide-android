@@ -4,7 +4,11 @@ before_install:
   - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
 
-script: ./launch-android-tests.sh
+before_script:
+  - chmod +x launch-android-tests.sh
+
+script:
+  - ./launch-android-tests.sh
 
 android:
   components:

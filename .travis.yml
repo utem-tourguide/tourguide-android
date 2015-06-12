@@ -21,7 +21,7 @@ android:
     - android-22
 
     # imágenes para probar en ellas
-    - sys-img-armeabi-v7a-android-14 # ice_cream_sandwich
+    - sys-img-armeabi-v7a-android-15 # ice_cream_sandwich
     - sys-img-armeabi-v7a-android-16 # jelly_bean
     - sys-img-armeabi-v7a-android-19 # kitkat
     - sys-img-armeabi-v7a-android-21 # lollipop

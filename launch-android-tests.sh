@@ -5,7 +5,7 @@ ANDROID_APIS=(14 16 19 21 22)
 chmod +x gradlew
 
 function main {
-  for api in ANDROID_APIS; do
+  for api in ${ANDROID_APIS[@]}; do
     echo "Launching emulator for android-$api..."
     launch_emulator_for "android-$api"
     echo "Running tests on android-$api..."

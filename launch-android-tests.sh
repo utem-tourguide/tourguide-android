@@ -6,8 +6,11 @@ chmod +x gradlew
 
 function main {
   for api in ANDROID_APIS; do
+    echo "Launching emulator for android-$api..."
     launch_emulator_for "android-$api"
+    echo "Running tests on android-$api..."
     ./gradlew build connectedCheck
+    echo "Killing emulator for android-$api..."
     kill_emulator
   done
 }

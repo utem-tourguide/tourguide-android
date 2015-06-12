@@ -26,7 +26,6 @@ function launch_emulator_for {
 }
 
 function kill_emulator {
-  killall emulator-arm
   killall emulator64-arm
   killall adb
   android delete avd -n test

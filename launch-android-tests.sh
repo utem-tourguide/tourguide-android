@@ -4,6 +4,9 @@ ANDROID_APIS=(14 16 19 21 22)
 
 chmod +x gradlew
 
+# mostrar las api's instaladas para propósitos de debugging
+android list targets
+
 function main {
   for api in ${ANDROID_APIS[@]}; do
     echo "Launching emulator for android-$api..."

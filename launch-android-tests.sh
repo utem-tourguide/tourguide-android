@@ -1,6 +1,6 @@
 #! /bin/bash
 
-ANDROID_APIS=(14 16 19 21 22)
+ANDROID_APIS=(15 16 19 21 22)
 
 chmod +x gradlew
 

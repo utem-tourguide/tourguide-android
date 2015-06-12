@@ -9,7 +9,6 @@ android list targets
 
 function main {
   for api in ${ANDROID_APIS[@]}; do
-    echo "Launching emulator for android-$api..."
     launch_emulator_for "android-$api"
     echo "Running tests on android-$api..."
     ./gradlew build connectedCheck
@@ -19,7 +18,8 @@ function main {
 }
 
 function launch_emulator_for {
-  echo no | android create avd --force -n test -t $1 --abi armeabi-v7a
+  echo "Launching emulator for $1..."
+  echo no | android create avd --force -n test -t "$1" --abi armeabi-v7a
   emulator -avd test -no-skin -no-audio -no-window &
   android-wait-for-emulator
   adb shell input keyevent 82 &

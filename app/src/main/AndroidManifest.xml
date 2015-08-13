@@ -21,6 +21,10 @@
             android:name=".TGLoginActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
+        <activity
+            android:name=".TGDatosUsuarioActivity"
+            android:label="@string/title_activity_tgdatos_usuario" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

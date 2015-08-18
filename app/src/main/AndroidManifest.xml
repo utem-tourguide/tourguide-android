@@ -23,17 +23,17 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
-            android:name="com.tourguide.activities.DatosUsuario"
+            android:name=".activities.Perfil"
             android:label="@string/title_activity_datos_usuario" >
-        </activity>
-        <activity
-            android:name="com.tourguide.activities.Informacion"
-            android:label="@string/title_activity_informacion" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tourguide.activities.Informacion"
+            android:label="@string/title_activity_informacion" >
         </activity>
     </application>
 

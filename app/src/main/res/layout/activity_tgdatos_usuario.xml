@@ -17,14 +17,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/nombre"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:hint="Nombre" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/apellido"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:hint="Apellido" />
 
         <EditText
             android:layout_width="match_parent"
@@ -33,7 +35,8 @@
             android:ems="10"
             android:id="@+id/correo"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:hint="Correo" />
 
         <Spinner
             android:layout_width="match_parent"
@@ -49,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancelar"
-        android:id="@+id/button2"
+        android:id="@+id/cancelar"
         android:onClick="cancelar"
         android:nestedScrollingEnabled="false"
         android:layout_alignBottom="@+id/linearLayout"/>
@@ -58,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Guardar"
-        android:id="@+id/button"
+        android:id="@+id/guardar"
         android:onClick="guardar"
         android:layout_alignParentBottom="true"
         android:layout_alignEnd="@+id/linearLayout" />

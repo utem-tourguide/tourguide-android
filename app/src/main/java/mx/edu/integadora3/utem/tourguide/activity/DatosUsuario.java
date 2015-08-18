@@ -1,17 +1,18 @@
-package mx.edu.integadora3.utem.tourguide;
+package mx.edu.integadora3.utem.tourguide.activity;
 
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import mx.edu.integadora3.utem.tourguide.R;
 
-public class TGDatosUsuarioActivity extends Activity {
+
+public class DatosUsuario extends Activity {
 
     public Spinner spinner;
     public EditText nombre;
@@ -24,7 +25,7 @@ public class TGDatosUsuarioActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tgdatos_usuario);
+        setContentView(R.layout.activity_datos_usuario);
 
         nombre = (EditText) findViewById(R.id.nombre);
         apellido = (EditText) findViewById(R.id.apellido);

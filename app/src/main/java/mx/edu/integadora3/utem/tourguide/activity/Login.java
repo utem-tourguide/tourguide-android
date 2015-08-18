@@ -1,4 +1,4 @@
-package mx.edu.integadora3.utem.tourguide;
+package mx.edu.integadora3.utem.tourguide.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -24,9 +24,10 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
+import mx.edu.integadora3.utem.tourguide.R;
 import mx.edu.integadora3.utem.tourguide.models.User;
 
-public class TGLoginActivity extends Activity {
+public class Login extends Activity {
 
   private UserLoginTask mAuthTask = null;
 
@@ -77,7 +78,7 @@ public class TGLoginActivity extends Activity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_tglogin);
+    setContentView(R.layout.activity_login);
 
     mEmailView = (EditText) findViewById(R.id.email);
 
@@ -198,7 +199,7 @@ public class TGLoginActivity extends Activity {
     }
 
     protected void launchMainActivity() {
-      mContext.startActivity(new Intent(this.mContext, TGMainActivity.class));
+      mContext.startActivity(new Intent(this.mContext, Main.class));
     }
   }
 }

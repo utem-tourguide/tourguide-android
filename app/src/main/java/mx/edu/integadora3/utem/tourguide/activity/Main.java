@@ -1,16 +1,18 @@
-package mx.edu.integadora3.utem.tourguide;
+package mx.edu.integadora3.utem.tourguide.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class TGMainActivity extends AppCompatActivity {
+import mx.edu.integadora3.utem.tourguide.R;
+
+public class Main extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tgmain);
+        setContentView(R.layout.activity_main);
     }
 
     @Override

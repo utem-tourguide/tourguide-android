@@ -26,10 +26,10 @@
                   android:layout_marginTop="15sp">
 
         <ImageView
-            android:layout_width="180dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:id="@+id/logo"
-            android:src="@mipmap/tourguide_logo"
+            android:src="@mipmap/logo"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"/>

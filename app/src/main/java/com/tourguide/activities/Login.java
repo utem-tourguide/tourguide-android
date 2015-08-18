@@ -1,4 +1,4 @@
-package mx.edu.integadora3.utem.tourguide.activity;
+package com.tourguide.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -24,8 +24,8 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
-import mx.edu.integadora3.utem.tourguide.R;
-import mx.edu.integadora3.utem.tourguide.models.User;
+import com.tourguide.R;
+import com.tourguide.models.User;
 
 public class Login extends Activity {
 

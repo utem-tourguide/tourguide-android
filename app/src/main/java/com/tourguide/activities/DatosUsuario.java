@@ -1,4 +1,4 @@
-package mx.edu.integadora3.utem.tourguide.activity;
+package com.tourguide.activities;
 
 import android.app.Activity;
 import android.content.res.Configuration;
@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import mx.edu.integadora3.utem.tourguide.R;
+import com.tourguide.R;
 
 
 public class DatosUsuario extends Activity {

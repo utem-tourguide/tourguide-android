@@ -1,4 +1,4 @@
-package mx.edu.integadora3.utem.tourguide.models;
+package com.tourguide.models;
 
 /**
  * Clase base para los modelos del app.

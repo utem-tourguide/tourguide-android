@@ -1,11 +1,11 @@
-package mx.edu.integadora3.utem.tourguide.activity;
+package com.tourguide.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import mx.edu.integadora3.utem.tourguide.R;
+import com.tourguide.R;
 
 public class Main extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package mx.edu.integadora3.utem.tourguide.models;
+package com.tourguide.models;
 
 /**
  * Representa un usuario de TourGuide.

@@ -1,4 +1,4 @@
-package mx.edu.integadora3.utem.tourguide.activity;
+package com.tourguide.activities;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import mx.edu.integadora3.utem.tourguide.R;
+import com.tourguide.R;
 
 
 /**

@@ -1,5 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="mx.edu.integadora3.utem.tourguide.activity.DatosUsuario">
+    tools:context="com.tourguide.activities.DatosUsuario">
 </menu>

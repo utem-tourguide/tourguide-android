@@ -1,4 +1,4 @@
-package mx.edu.integadora3.utem.tourguide;
+package com.tourguide;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

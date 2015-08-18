@@ -5,7 +5,7 @@ android {
     buildToolsVersion '22.0.1'
 
     defaultConfig {
-        applicationId "mx.edu.integadora3.utem.tourguide"
+        applicationId "com.tourguide"
         minSdkVersion 19
         targetSdkVersion 22
         versionCode 1

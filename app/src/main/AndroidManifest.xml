@@ -24,7 +24,11 @@
         </activity>
         <activity
             android:name="com.tourguide.activities.DatosUsuario"
-            android:label="@string/title_activity_tgdatos_usuario" >
+            android:label="@string/title_activity_datos_usuario" >
+        </activity>
+        <activity
+            android:name="com.tourguide.activities.Informacion"
+            android:label="@string/title_activity_informacion" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

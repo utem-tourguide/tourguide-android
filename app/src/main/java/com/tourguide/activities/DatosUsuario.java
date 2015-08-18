@@ -34,7 +34,7 @@ public class DatosUsuario extends Activity {
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_tgdatos_usuario, menu);
+    getMenuInflater().inflate(R.menu.menu_datos_usuario, menu);
     return true;
   }
 

@@ -4,24 +4,15 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -33,16 +24,13 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import mx.edu.integadora3.utem.tourguide.models.User;
 
-public class TGLoginActivity extends Activity implements LoaderCallbacks<Cursor> {
+public class TGLoginActivity extends Activity {
 
   private UserLoginTask mAuthTask = null;
 
-  private AutoCompleteTextView mEmailView;
+  private EditText mEmailView;
   private EditText mPasswordView;
   private View mProgressView;
   private View mLoginFormView;
@@ -91,8 +79,7 @@ public class TGLoginActivity extends Activity implements LoaderCallbacks<Cursor>
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_tglogin);
 
-    mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-    populateAutoComplete();
+    mEmailView = (EditText) findViewById(R.id.email);
 
     mPasswordView = (EditText) findViewById(R.id.password);
     mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -113,10 +100,6 @@ public class TGLoginActivity extends Activity implements LoaderCallbacks<Cursor>
 
     mLoginFormView = findViewById(R.id.login_form);
     mProgressView = findViewById(R.id.login_progress);
-  }
-
-  private void populateAutoComplete() {
-    getLoaderManager().initLoader(0, null, this);
   }
 
   private boolean isEmailValid(String email) {
@@ -153,54 +136,6 @@ public class TGLoginActivity extends Activity implements LoaderCallbacks<Cursor>
       mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
       mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
     }
-  }
-
-  @Override
-  public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-    return new CursorLoader(this,
-      Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
-        ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
-
-      ContactsContract.Contacts.Data.MIMETYPE +
-        " = ?", new String[]{ContactsContract.CommonDataKinds.Email
-      .CONTENT_ITEM_TYPE},
-
-      ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
-  }
-
-  @Override
-  public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-    List<String> emails = new ArrayList<String>();
-    cursor.moveToFirst();
-    while (!cursor.isAfterLast()) {
-      emails.add(cursor.getString(ProfileQuery.ADDRESS));
-      cursor.moveToNext();
-    }
-
-    addEmailsToAutoComplete(emails);
-  }
-
-  @Override
-  public void onLoaderReset(Loader<Cursor> cursorLoader) {
-
-  }
-
-  private interface ProfileQuery {
-    String[] PROJECTION = {
-      ContactsContract.CommonDataKinds.Email.ADDRESS,
-      ContactsContract.CommonDataKinds.Email.IS_PRIMARY,
-    };
-
-    int ADDRESS = 0;
-  }
-
-
-  private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
-    ArrayAdapter<String> adapter =
-      new ArrayAdapter<String>(TGLoginActivity.this,
-        android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
-
-    mEmailView.setAdapter(adapter);
   }
 
   private class UserLoginTask extends AsyncTask<Void, Void, Integer> {

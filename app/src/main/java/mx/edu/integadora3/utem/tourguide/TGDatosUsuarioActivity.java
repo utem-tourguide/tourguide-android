@@ -1,20 +1,14 @@
 package mx.edu.integadora3.utem.tourguide;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-
-import com.google.gson.Gson;
-import com.squareup.okhttp.FormEncodingBuilder;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
-
-import mx.edu.integadora3.utem.tourguide.models.User;
 
 
 public class TGDatosUsuarioActivity extends Activity {
@@ -23,6 +17,9 @@ public class TGDatosUsuarioActivity extends Activity {
     public EditText nombre;
     public EditText apellido;
     public EditText correo;
+    public Button guardar;
+    private Configuration conf;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +29,7 @@ public class TGDatosUsuarioActivity extends Activity {
         nombre = (EditText) findViewById(R.id.nombre);
         apellido = (EditText) findViewById(R.id.apellido);
         correo = (EditText) findViewById(R.id.correo);
+
     }
 
     @Override
@@ -49,5 +47,41 @@ public class TGDatosUsuarioActivity extends Activity {
         int id = item.getItemId();
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public class DatosUsuario{
+        private String nombre;
+        private String apellido;
+        private String correo;
+
+        public DatosUsuario(String nombre, String apellido, String correo){
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.correo = correo;
+        }
+
+        public String getNombre(){
+            return nombre;
+        }
+
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
+
+        public String getApellido(){
+            return apellido;
+        }
+
+        public void setApellido(String apellido) {
+            this.apellido = apellido;
+        }
+
+        public String getCorreo(){
+            return correo;
+        }
+
+        public void setCorreo(String correo) {
+            this.correo = correo;
+        }
     }
 }

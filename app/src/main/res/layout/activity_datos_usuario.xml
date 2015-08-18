@@ -9,8 +9,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/linearLayout">
+        android:layout_height="match_parent">
 
         <EditText
             android:layout_width="match_parent"
@@ -51,19 +50,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancelar"
-        android:id="@+id/cancelar"
-        android:onClick="cancelar"
-        android:nestedScrollingEnabled="false"
-        android:layout_alignBottom="@+id/linearLayout"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Guardar"
         android:id="@+id/guardar"
         android:onClick="guardar"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/linearLayout" />
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

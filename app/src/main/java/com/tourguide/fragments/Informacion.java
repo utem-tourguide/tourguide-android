@@ -11,13 +11,13 @@ import com.tourguide.R;
 
 public class Informacion extends Fragment {
 
-    public Informacion() {
-    }
+  public Informacion() {
+  }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_informacion, container, 
-false);
-    }
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                           Bundle savedInstanceState) {
+
+    return inflater.inflate(R.layout.fragment_informacion, container, false);
+  }
 }

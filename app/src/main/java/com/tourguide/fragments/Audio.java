@@ -10,12 +10,13 @@ import com.tourguide.R;
 
 public class Audio extends Fragment {
 
-    public Audio() {
-    }
+  public Audio() {
+  }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_audio, container, false);
-    }
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                           Bundle savedInstanceState) {
+
+    return inflater.inflate(R.layout.fragment_audio, container, false);
+  }
 }

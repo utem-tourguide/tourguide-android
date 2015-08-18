@@ -14,72 +14,72 @@ import com.tourguide.adapters.InformacionTabs;
 
 public class Informacion extends AppCompatActivity {
 
-    private ViewPager viewPager;
+  private ViewPager viewPager;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_informacion);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_informacion);
 
-        mostrarTabsEnActionBar();
+    mostrarTabsEnActionBar();
+  }
+
+  private void mostrarTabsEnActionBar() {
+    viewPager = (ViewPager) findViewById(R.id.viewPager);
+    viewPager.setAdapter(new InformacionTabs(getSupportFragmentManager()));
+
+    ActionBar actionBar = getSupportActionBar();
+    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+    ActionBar.TabListener tabListener = generarTabListener();
+
+    actionBar.addTab(actionBar.newTab().setText(R.string.informacion).setTabListener(tabListener));
+    actionBar.addTab(actionBar.newTab().setText(R.string.audio).setTabListener(tabListener));
+
+    viewPager.setOnPageChangeListener(generarOnPageChangeListener());
+  }
+
+  private ActionBar.TabListener generarTabListener() {
+    return new ActionBar.TabListener() {
+      @Override
+      public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+        viewPager.setCurrentItem(tab.getPosition());
+      }
+
+      @Override
+      public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+      }
+
+      @Override
+      public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+      }
+    };
+  }
+
+  private ViewPager.OnPageChangeListener generarOnPageChangeListener() {
+    return new ViewPager.SimpleOnPageChangeListener() {
+      @Override
+      public void onPageSelected(int position) {
+        getSupportActionBar().setSelectedNavigationItem(position);
+      }
+    };
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_informacion, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    int id = item.getItemId();
+
+    if (id == R.id.action_settings) {
+      return true;
     }
 
-    private void mostrarTabsEnActionBar() {
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-        viewPager.setAdapter(new InformacionTabs(getSupportFragmentManager()));
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        ActionBar.TabListener tabListener = generarTabListener();
-
-        actionBar.addTab(actionBar.newTab().setText(R.string.informacion).setTabListener(tabListener));
-        actionBar.addTab(actionBar.newTab().setText(R.string.audio).setTabListener(tabListener));
-
-        viewPager.setOnPageChangeListener(generarOnPageChangeListener());
-    }
-
-    private ActionBar.TabListener generarTabListener() {
-        return new ActionBar.TabListener() {
-            @Override
-            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-            }
-
-            @Override
-            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-            }
-        };
-    }
-
-    private ViewPager.OnPageChangeListener generarOnPageChangeListener() {
-        return new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                getSupportActionBar().setSelectedNavigationItem(position);
-            }
-        };
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_informacion, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+    return super.onOptionsItemSelected(item);
+  }
 }

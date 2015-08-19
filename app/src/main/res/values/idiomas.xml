@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="idiomas_array">
+    <string-array name="idiomas">
         <item value="es">Español</item>
-        <item value="en">Ingles</item>
-        <item value="fr">Frances</item>
+        <item value="en">Inglés</item>
+        <item value="fr">Francés</item>
     </string-array>
 </resources>

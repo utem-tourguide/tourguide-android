@@ -4,6 +4,7 @@ import android.widget.ArrayAdapter;
 
 import com.tourguide.activities.PerfilActivity;
 import com.tourguide.models.Usuario;
+import com.tourguide.support.Constants;
 
 public class ObtenerPerfilSuccessHandler extends BackendResponseHandler {
 
@@ -15,7 +16,7 @@ public class ObtenerPerfilSuccessHandler extends BackendResponseHandler {
 
   @Override
   public void handle() {
-    Usuario usuario = actividad.getUsuario();
+    Usuario usuario = Constants.getUsuario();
 
     actividad.getNombreInput().setText(usuario.getNombre());
     actividad.getApellidoInput().setText(usuario.getApellido());

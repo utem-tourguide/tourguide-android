@@ -53,6 +53,7 @@ public class ModificarPerfilTask extends AsyncTask<Void, Void, Response> {
 
     try {
       respuesta = new Response(respuestaHttp.code(), respuestaHttp.body().string());
+      System.out.println(respuesta.getBody());
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -64,11 +65,11 @@ public class ModificarPerfilTask extends AsyncTask<Void, Void, Response> {
   protected void onPostExecute(Response respuesta) {
     System.out.println("Información enviada. Procesando respuesta.");
 
-    actividad.mostrarProgreso(false);
-
     BackendResponseHandler handler = handlers.get(respuesta.getStatus());
     handler.setResponse(respuesta);
     handler.handle();
+
+    actividad.mostrarProgreso(false);
   }
 
   private Request generarRequest() {

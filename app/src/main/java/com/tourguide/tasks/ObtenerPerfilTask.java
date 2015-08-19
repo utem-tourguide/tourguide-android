@@ -6,6 +6,7 @@ import com.tourguide.activities.PerfilActivity;
 import com.tourguide.factories.UsuariosFactory;
 import com.tourguide.handlers.BackendResponseHandler;
 import com.tourguide.models.Usuario;
+import com.tourguide.support.Constants;
 
 import java.util.Map;
 
@@ -37,7 +38,7 @@ public class ObtenerPerfilTask extends AsyncTask<Void, Void, Usuario> {
     System.out.println("Perfil obtenido. Mostrando perfil en pantalla.");
 
     actividad.mostrarProgreso(false);
-    actividad.setUsuario(usuario);
+    Constants.setUsuario(usuario);
 
     handlers.get(usuario != null).handle();
   }

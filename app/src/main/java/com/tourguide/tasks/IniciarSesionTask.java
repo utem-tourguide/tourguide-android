@@ -6,6 +6,7 @@ import com.tourguide.activities.LoginActivity;
 import com.tourguide.factories.UsuariosFactory;
 import com.tourguide.handlers.BackendResponseHandler;
 import com.tourguide.models.Usuario;
+import com.tourguide.support.Constants;
 
 import java.util.Map;
 
@@ -31,6 +32,8 @@ public class IniciarSesionTask extends AsyncTask<Void, Void, Usuario> {
   @Override
   protected void onPostExecute(Usuario usuario) {
     onCancelled();
+
+    Constants.setUsuario(usuario);
 
     handlers.get(usuario != null).handle();
   }

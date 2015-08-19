@@ -53,4 +53,5 @@ public class Usuario extends Model {
   public String getUrlParaModificar() {
     return Constants.BACKEND_URL + "/usuarios/" + getId();
   }
+
 }

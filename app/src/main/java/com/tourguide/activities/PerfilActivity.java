@@ -14,16 +14,13 @@ import com.tourguide.handlers.ModificarPerfilSuccessHandler;
 import com.tourguide.handlers.ModificarPerfilUnprocessableHandler;
 import com.tourguide.handlers.ObtenerPerfilErrorHandler;
 import com.tourguide.handlers.ObtenerPerfilSuccessHandler;
-import com.tourguide.models.Usuario;
+import com.tourguide.support.Constants;
 import com.tourguide.tasks.ModificarPerfilTask;
-import com.tourguide.tasks.ObtenerPerfilTask;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class PerfilActivity extends ProgressActivity {
-
-  private static final int USUARIO_ID = 10;
 
   private EditText nombreInput;
   private EditText apellidoInput;
@@ -31,8 +28,6 @@ public class PerfilActivity extends ProgressActivity {
   private EditText contraseñaInput;
   private EditText contraseñaConfirmationInput;
   private Spinner  idiomaInput;
-
-  private Usuario usuario;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +61,7 @@ public class PerfilActivity extends ProgressActivity {
   }
 
   private void cargarPerfil() {
-    Map handlers = generarHandlersParaObtener();
-    ObtenerPerfilTask tarea = new ObtenerPerfilTask(USUARIO_ID, this, handlers);
-    tarea.execute();
+    new ObtenerPerfilSuccessHandler(this).handle();
   }
 
   /**
@@ -77,12 +70,12 @@ public class PerfilActivity extends ProgressActivity {
    * @param item
    */
   public void onGuardarItemClick(MenuItem item) {
-    if (usuario == null) return;
+    if (Constants.getUsuario() == null) return;
 
     actualizarUsuario();
     Map handlers = generarHandlersParaModificar();
 
-    ModificarPerfilTask tarea = new ModificarPerfilTask(usuario, this, handlers);
+    ModificarPerfilTask tarea = new ModificarPerfilTask(Constants.getUsuario(), this, handlers);
     tarea.execute();
   }
 
@@ -94,14 +87,6 @@ public class PerfilActivity extends ProgressActivity {
   @Override
   public ProgressBar getProgressBar() {
     return (ProgressBar) findViewById(R.id.perfil_progress);
-  }
-
-  public Usuario getUsuario() {
-    return usuario;
-  }
-
-  public void setUsuario(Usuario usuario) {
-    this.usuario = usuario;
   }
 
   public EditText getNombreInput() {
@@ -129,10 +114,10 @@ public class PerfilActivity extends ProgressActivity {
   }
 
   private void actualizarUsuario() {
-    usuario.setEmail(getEmailInput().getText().toString());
-    usuario.setNombre(getNombreInput().getText().toString());
-    usuario.setApellido(getApellidoInput().getText().toString());
-    usuario.setIdioma(getIdiomaInput().getSelectedItemPosition());
+    Constants.getUsuario().setEmail(getEmailInput().getText().toString());
+    Constants.getUsuario().setNombre(getNombreInput().getText().toString());
+    Constants.getUsuario().setApellido(getApellidoInput().getText().toString());
+    Constants.getUsuario().setIdioma(getIdiomaInput().getSelectedItemPosition());
   }
 
   private Map generarHandlersParaObtener() {

@@ -10,7 +10,7 @@ abstract public class Model {
   /**
    * Identificador único del modelo.
    */
-  private int id;
+  protected int id;
 
   public int getId() {
     return id;

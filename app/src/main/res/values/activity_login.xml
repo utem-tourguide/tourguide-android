@@ -4,11 +4,11 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Correo electrónico</string>
     <string name="prompt_password">Contraseña</string>
-    <string name="action_sign_in">Iniciar sesión</string>
-    <string name="action_sign_in_short">Iniciar sesión</string>
+    <string name="action_sign_in">Entrar</string>
+    <string name="action_sign_in_short">Entrar</string>
 
     <string name="error_invalid_email">La dirección de correo electrónico es inválida</string>
     <string name="error_invalid_password">La contraseña es demasiado corta</string>
-    <string name="error_incorrect_password">La contraseña es incorrecta</string>
+    <string name="error_incorrect_password">El correo o la contraseña son incorrectoskev</string>
     <string name="error_field_required">Este campo no puede dejarse en blanco</string>
 </resources>

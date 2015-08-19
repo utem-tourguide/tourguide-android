@@ -29,7 +29,7 @@ public class ObtenerPerfilTask extends AsyncTask<Void, Void, Usuario> {
   @Override
   protected Usuario doInBackground(Void... params) {
     System.out.println("Obteniendo perfil de usuario con id " + usuarioId + ".");
-    return UsuariosFactory.construirConId(usuarioId);
+    return UsuariosFactory.construirPorId(usuarioId);
   }
 
   @Override

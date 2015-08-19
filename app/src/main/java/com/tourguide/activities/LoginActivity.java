@@ -1,8 +1,5 @@
 package com.tourguide.activities;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -13,51 +10,49 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.squareup.okhttp.FormEncodingBuilder;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
 import com.tourguide.R;
-import com.tourguide.models.Usuario;
+import com.tourguide.handlers.BackendResponseHandler;
+import com.tourguide.handlers.IniciarSesionErrorHandler;
+import com.tourguide.handlers.IniciarSesionSuccessHandler;
+import com.tourguide.tasks.IniciarSesionTask;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends ProgressActivity {
 
-  private UserLoginTask mAuthTask = null;
+  private IniciarSesionTask loginTask = null;
 
-  private EditText mEmailView;
-  private EditText mPasswordView;
-  private View mProgressView;
-  private View mLoginFormView;
+  private EditText emailInput;
+  private EditText contraseñaInput;
+  private View     progressBar;
+  private View     loginForm;
 
   public void attemptLogin() {
-    if (mAuthTask != null) {
-      return;
-    }
+    if (loginTask != null) return;
 
-    mEmailView.setError(null);
-    mPasswordView.setError(null);
+    emailInput.setError(null);
+    contraseñaInput.setError(null);
 
-    String email = mEmailView.getText().toString();
-    String password = mPasswordView.getText().toString();
+    String email = emailInput.getText().toString();
+    String password = contraseñaInput.getText().toString();
 
     boolean cancel = false;
     View focusView = null;
 
     if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-      mPasswordView.setError(getString(R.string.error_invalid_password));
-      focusView = mPasswordView;
+      contraseñaInput.setError(getString(R.string.error_invalid_password));
+      focusView = contraseñaInput;
       cancel = true;
     }
 
     if (TextUtils.isEmpty(email)) {
-      mEmailView.setError(getString(R.string.error_field_required));
-      focusView = mEmailView;
+      emailInput.setError(getString(R.string.error_field_required));
+      focusView = emailInput;
       cancel = true;
     } else if (!isEmailValid(email)) {
-      mEmailView.setError(getString(R.string.error_invalid_email));
-      focusView = mEmailView;
+      emailInput.setError(getString(R.string.error_invalid_email));
+      focusView = emailInput;
       cancel = true;
     }
 
@@ -65,9 +60,53 @@ public class LoginActivity extends ProgressActivity {
       focusView.requestFocus();
     } else {
       mostrarProgreso(true);
-      mAuthTask = new UserLoginTask(email, password, this);
-      mAuthTask.execute((Void) null);
+      Map handlers = generarHandlersParaLogin();
+      setLoginTask(new IniciarSesionTask(this, email, password, handlers));
+      loginTask.execute((Void) null);
     }
+  }
+
+  private Map generarHandlersParaLogin() {
+    Map<Boolean, BackendResponseHandler> handlers = new HashMap<>();
+
+    handlers.put(true, new IniciarSesionSuccessHandler(this));
+    handlers.put(false, new IniciarSesionErrorHandler(this));
+
+    return handlers;
+  }
+
+  @Override
+  public View getEscondible() {
+    return loginForm;
+  }
+
+  @Override
+  public ProgressBar getProgressBar() {
+    return (ProgressBar) progressBar;
+  }
+
+  public IniciarSesionTask getLoginTask() {
+    return loginTask;
+  }
+
+  public void setLoginTask(IniciarSesionTask loginTask) {
+    this.loginTask = loginTask;
+  }
+
+  public EditText getEmailInput() {
+    return emailInput;
+  }
+
+  public void setEmailInput(EditText emailInput) {
+    this.emailInput = emailInput;
+  }
+
+  public EditText getContraseñaInput() {
+    return contraseñaInput;
+  }
+
+  public void setContraseñaInput(EditText contraseñaInput) {
+    this.contraseñaInput = contraseñaInput;
   }
 
   @Override
@@ -75,15 +114,15 @@ public class LoginActivity extends ProgressActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
 
-    mEmailView = (EditText) findViewById(R.id.email);
+    emailInput = (EditText) findViewById(R.id.email);
 
-    mPasswordView = (EditText) findViewById(R.id.password);
-    mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+    contraseñaInput = (EditText) findViewById(R.id.password);
+    contraseñaInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
       @Override
       public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-          attemptLogin();
-          return true;
-        }
+        attemptLogin();
+        return true;
+      }
     });
 
     Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
@@ -94,8 +133,8 @@ public class LoginActivity extends ProgressActivity {
       }
     });
 
-    mLoginFormView = findViewById(R.id.login_form);
-    mProgressView = findViewById(R.id.login_progress);
+    loginForm = findViewById(R.id.login_form);
+    progressBar = findViewById(R.id.login_progress);
   }
 
   private boolean isEmailValid(String email) {
@@ -106,78 +145,4 @@ public class LoginActivity extends ProgressActivity {
     return password.length() > 4;
   }
 
-  @Override
-  public View getEscondible() {
-    return mLoginFormView;
-  }
-
-  @Override
-  public ProgressBar getProgressBar() {
-    return (ProgressBar) mProgressView;
-  }
-
-  private class UserLoginTask extends AsyncTask<Void, Void, Integer> {
-
-    private final String  mEmail;
-    private final String  mPassword;
-    private final Context mContext;
-
-    UserLoginTask(String email, String password, Context context) {
-      mEmail    = email;
-      mPassword = password;
-      mContext  = context;
-    }
-
-    @Override
-    protected Integer doInBackground(Void... params) {
-      OkHttpClient client = new OkHttpClient();
-      try {
-        RequestBody formBody = new FormEncodingBuilder()
-          .add("email", mEmail)
-          .add("contrasena", mPassword)
-          .build();
-
-        Request request = new Request.Builder()
-          .method("POST", formBody)
-          .url("http://tourguide-admin.herokuapp.com/sesiones/entrar")
-          .header("Accept", "application/json")
-          .build();
-
-        Response response = client.newCall(request).execute();
-        if (response.isSuccessful()) {
-          Usuario usuario = new Gson().fromJson(response.body().charStream(), Usuario.class);
-          return usuario.getId();
-        } else {
-          return null;
-        }
-      } catch (Exception e) {
-        e.printStackTrace();
-        return null;
-      }
-    }
-
-    @Override
-    protected void onPostExecute(final Integer userId) {
-      mAuthTask = null;
-      mostrarProgreso(false);
-
-      if (userId != null) {
-        launchMainActivity();
-      } else {
-        mPasswordView.setError(getString(R.string.error_incorrect_password));
-        mPasswordView.requestFocus();
-      }
-    }
-
-    @Override
-    protected void onCancelled() {
-      mAuthTask = null;
-      mostrarProgreso(false);
-    }
-
-    protected void launchMainActivity() {
-      mContext.startActivity(new Intent(this.mContext, MainActivity.class));
-    }
-  }
 }
-

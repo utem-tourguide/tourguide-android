@@ -7,5 +7,5 @@
 
     <string name="informacion">Información</string>
     <string name="audio">Audio</string>
-    <string name="title_activity_datos_usuario">Perfil</string>
+    <string name="title_activity_perfil">Perfil</string>
 </resources>

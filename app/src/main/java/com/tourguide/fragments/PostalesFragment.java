@@ -8,15 +8,15 @@ import android.view.ViewGroup;
 
 import com.tourguide.R;
 
-public class AudioFragment extends Fragment {
+public class PostalesFragment extends Fragment {
 
-  public AudioFragment() {
+  public PostalesFragment() {
   }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
 
-    return inflater.inflate(R.layout.fragment_audio, container, false);
+    return inflater.inflate(R.layout.fragment_postales, container, false);
   }
 }

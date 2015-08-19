@@ -4,13 +4,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.tourguide.fragments.AudioFragment;
 import com.tourguide.fragments.InformacionFragment;
+import com.tourguide.fragments.PostalesFragment;
 
 public class InformacionTabsAdapter extends FragmentPagerAdapter {
 
   public static Fragment[] fragments = {new InformacionFragment(),
-                                        new AudioFragment()};
+                                        new PostalesFragment()};
 
   public InformacionTabsAdapter(FragmentManager fm) {
     super(fm);

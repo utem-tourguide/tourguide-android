@@ -12,11 +12,14 @@ import com.tourguide.R;
 import com.tourguide.handlers.BackendResponseHandler;
 import com.tourguide.handlers.ModificarPerfilSuccessHandler;
 import com.tourguide.handlers.ModificarPerfilUnprocessableHandler;
+import com.tourguide.handlers.ObtenerPerfilErrorHandler;
+import com.tourguide.handlers.ObtenerPerfilSuccessHandler;
 import com.tourguide.models.Usuario;
 import com.tourguide.tasks.ModificarPerfilTask;
 import com.tourguide.tasks.ObtenerPerfilTask;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class PerfilActivity extends ProgressActivity {
 
@@ -63,7 +66,8 @@ public class PerfilActivity extends ProgressActivity {
   }
 
   private void cargarPerfil() {
-    ObtenerPerfilTask tarea = new ObtenerPerfilTask(USUARIO_ID, this);
+    Map handlers = generarHandlersParaObtener();
+    ObtenerPerfilTask tarea = new ObtenerPerfilTask(USUARIO_ID, this, handlers);
     tarea.execute();
   }
 
@@ -76,7 +80,7 @@ public class PerfilActivity extends ProgressActivity {
     if (usuario == null) return;
 
     actualizarUsuario();
-    HashMap handlers = generarHandlersParaModificar();
+    Map handlers = generarHandlersParaModificar();
 
     ModificarPerfilTask tarea = new ModificarPerfilTask(usuario, this, handlers);
     tarea.execute();
@@ -131,8 +135,17 @@ public class PerfilActivity extends ProgressActivity {
     usuario.setIdioma(getIdiomaInput().getSelectedItemPosition());
   }
 
-  private HashMap generarHandlersParaModificar() {
-    HashMap<Integer, BackendResponseHandler> handlers = new HashMap<>();
+  private Map generarHandlersParaObtener() {
+    Map<Boolean, BackendResponseHandler> handlers = new HashMap<>();
+
+    handlers.put(true, new ObtenerPerfilSuccessHandler(this));
+    handlers.put(false, new ObtenerPerfilErrorHandler(this));
+
+    return handlers;
+  }
+
+  private Map generarHandlersParaModificar() {
+    Map<Integer, BackendResponseHandler> handlers = new HashMap<>();
 
     handlers.put(200, new ModificarPerfilSuccessHandler(this));
     handlers.put(422, new ModificarPerfilUnprocessableHandler(this));

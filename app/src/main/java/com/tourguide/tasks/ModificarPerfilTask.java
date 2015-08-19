@@ -12,7 +12,7 @@ import com.tourguide.handlers.BackendResponseHandler;
 import com.tourguide.models.Usuario;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Map;
 
 public class ModificarPerfilTask extends AsyncTask<Void, Void, Response> {
 
@@ -31,9 +31,9 @@ public class ModificarPerfilTask extends AsyncTask<Void, Void, Response> {
   /**
    * Manejadores de respuestas del backend.
    */
-  private HashMap<Integer, BackendResponseHandler> handlers;
+  private Map<Integer, BackendResponseHandler> handlers;
 
-  public ModificarPerfilTask(Usuario usuario, PerfilActivity actividad, HashMap<Integer, BackendResponseHandler> handlers) {
+  public ModificarPerfilTask(Usuario usuario, PerfilActivity actividad, Map handlers) {
     this.usuario = usuario;
     this.actividad = actividad;
     this.handlers = handlers;

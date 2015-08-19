@@ -1,21 +1,24 @@
 package com.tourguide.tasks;
 
 import android.os.AsyncTask;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import com.tourguide.activities.PerfilActivity;
 import com.tourguide.factories.UsuariosFactory;
+import com.tourguide.handlers.BackendResponseHandler;
 import com.tourguide.models.Usuario;
+
+import java.util.Map;
 
 public class ObtenerPerfilTask extends AsyncTask<Void, Void, Usuario> {
 
-  private int            usuarioId;
-  private PerfilActivity actividad;
+  private int                                  usuarioId;
+  private PerfilActivity                       actividad;
+  private Map<Boolean, BackendResponseHandler> handlers;
 
-  public ObtenerPerfilTask(int usuarioId, PerfilActivity actividad) {
+  public ObtenerPerfilTask(int usuarioId, PerfilActivity actividad, Map<Boolean, BackendResponseHandler> handlers) {
     this.usuarioId = usuarioId;
     this.actividad = actividad;
+    this.handlers = handlers;
   }
 
   @Override
@@ -34,24 +37,9 @@ public class ObtenerPerfilTask extends AsyncTask<Void, Void, Usuario> {
     System.out.println("Perfil obtenido. Mostrando perfil en pantalla.");
 
     actividad.mostrarProgreso(false);
-
-    if (usuario == null) {
-      Toast.makeText(actividad, "No se pudo cargar el perfil.", Toast.LENGTH_SHORT).show();
-    } else {
-      actividad.getNombreInput().setText(usuario.getNombre());
-      actividad.getApellidoInput().setText(usuario.getApellido());
-      actividad.getEmailInput().setText(usuario.getEmail());
-
-      int posicion = obtenerPosicionDeIdioma(usuario.getIdioma());
-      actividad.getIdiomaInput().setSelection(posicion);
-    }
-
     actividad.setUsuario(usuario);
+
+    handlers.get(usuario != null).handle();
   }
 
-  private int obtenerPosicionDeIdioma(String idioma) {
-    ArrayAdapter<String> opciones = new ArrayAdapter<String>(actividad, 0);
-
-    return opciones.getPosition(idioma);
-  }
 }

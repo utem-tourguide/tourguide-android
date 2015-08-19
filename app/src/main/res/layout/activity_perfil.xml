@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Nombre"/>
+            android:text="nombre"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Apellido"/>
+            android:text="apellido"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Correo electrónico"/>
+            android:text="correo electrónico"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -58,13 +58,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Contraseña"/>
+            android:text="contraseña"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Si deseas cambiar tu contraseña, escríbela aquí" />
+            android:text="Para cambiar tu contraseña, rellena el campo" />
 
         <EditText
             android:layout_width="match_parent"
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Confirmar contraseña"/>
+            android:text="confirmar contraseña"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Idioma preferido"/>
+            android:text="idioma preferido"/>
 
         <Spinner
             android:id="@+id/idioma"

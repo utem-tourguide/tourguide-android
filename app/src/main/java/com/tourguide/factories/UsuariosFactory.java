@@ -11,7 +11,7 @@ import com.tourguide.support.Constants;
 
 import java.io.IOException;
 
-public class UsuariosFactory {
+public class UsuariosFactory extends Factory {
 
   public static Usuario construirPorId(int id) {
     Usuario usuario = null;

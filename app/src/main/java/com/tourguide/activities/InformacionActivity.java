@@ -9,11 +9,35 @@ import android.view.MenuItem;
 
 import com.tourguide.R;
 import com.tourguide.adapters.InformacionTabsAdapter;
+import com.tourguide.models.UbicacionTuristica;
 
 
 public class InformacionActivity extends Activity {
 
   private ViewPager viewPager;
+  private UbicacionTuristica ubicacion;
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_informacion, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    int id = item.getItemId();
+
+    return id == R.id.action_settings || super.onOptionsItemSelected(item);
+
+  }
+
+  public UbicacionTuristica getUbicacion() {
+    return ubicacion;
+  }
+
+  public void setUbicacion(UbicacionTuristica ubicacion) {
+    this.ubicacion = ubicacion;
+  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +56,7 @@ public class InformacionActivity extends Activity {
     ActionBar.TabListener tabListener = generarTabListener();
 
     actionBar.addTab(actionBar.newTab().setText(R.string.informacion).setTabListener(tabListener));
-    actionBar.addTab(actionBar.newTab().setText(R.string.audio).setTabListener(tabListener));
+    actionBar.addTab(actionBar.newTab().setText(R.string.postales).setTabListener(tabListener));
 
     viewPager.setOnPageChangeListener(generarOnPageChangeListener());
   }
@@ -65,20 +89,4 @@ public class InformacionActivity extends Activity {
     };
   }
 
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_informacion, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    int id = item.getItemId();
-
-    if (id == R.id.action_settings) {
-      return true;
-    }
-
-    return super.onOptionsItemSelected(item);
-  }
 }

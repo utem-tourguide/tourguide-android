@@ -16,6 +16,8 @@ public class IniciarSesionSuccessHandler extends BackendResponseHandler {
   @Override
   public void handle() {
     actividad.startActivity(new Intent(actividad, MainActivity.class));
+
+    actividad.finish();
   }
 
 }

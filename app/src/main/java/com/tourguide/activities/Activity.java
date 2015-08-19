@@ -1,5 +1,7 @@
 package com.tourguide.activities;
 
-abstract public class Activity extends android.app.Activity {
+import android.support.v7.app.AppCompatActivity;
+
+abstract public class Activity extends AppCompatActivity {
 
 }

@@ -1,9 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:tools="http://schemas.android.com/tools"
-      tools:context=".TGMainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".TGMainActivity">
 
     <item android:title="@string/title_activity_perfil"
-        android:showAsAction="always"
+        app:showAsAction="always"
         android:icon="@mipmap/ic_account"
         android:onClick="onPerfilMenuItemClick"/>
 

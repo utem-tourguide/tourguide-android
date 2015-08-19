@@ -6,8 +6,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.tourguide.R;
+import com.tourguide.listeners.QRScannerListener;
+
+import eu.livotov.zxscan.ScannerView;
 
 public class MainActivity extends Activity {
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    public void onPerfilMenuItemClick(MenuItem item) {
+        startActivity(new Intent(this, PerfilActivity.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,19 +29,16 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    protected void onStart() {
+        super.onStart();
+
+        inicializarQRScanner();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void onPerfilMenuItemClick(MenuItem item) {
-        startActivity(new Intent(this, PerfilActivity.class));
+    private void inicializarQRScanner() {
+        ScannerView scanner = (ScannerView) findViewById(R.id.scanner);
+        scanner.setScannerViewEventListener(new QRScannerListener(scanner, this));
+        scanner.startScanner();
     }
 
 }

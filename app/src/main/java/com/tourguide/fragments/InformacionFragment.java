@@ -1,5 +1,6 @@
 package com.tourguide.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.tourguide.R;
+import com.tourguide.activities.InformacionActivity;
+import com.tourguide.handlers.BackendResponseHandler;
+import com.tourguide.handlers.ObtenerInfoUbicacionSuccessHandler;
+import com.tourguide.tasks.ObtenerInfoUbicacionTask;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class InformacionFragment extends ProgressFragment {
@@ -16,7 +24,14 @@ public class InformacionFragment extends ProgressFragment {
   private TextView informacionContenidoText;
   private TextView informacionLocalizacionText;
 
+  private InformacionActivity actividad;
+
   public InformacionFragment() {
+  }
+
+  @SuppressLint("ValidFragment")
+  public InformacionFragment(InformacionActivity actividad) {
+    this.actividad = actividad;
   }
 
   @Override
@@ -29,7 +44,19 @@ public class InformacionFragment extends ProgressFragment {
     return view;
   }
 
+  @Override
+  public void onStart() {
+    super.onStart();
 
+    Map<Boolean, BackendResponseHandler> handlers = new HashMap<>();
+    handlers.put(true, new ObtenerInfoUbicacionSuccessHandler(actividad, this));
+
+    ObtenerInfoUbicacionTask tarea = new ObtenerInfoUbicacionTask(actividad.getUbicacionId(),
+                                                                  actividad,
+                                                                  this,
+                                                                  handlers);
+    tarea.execute();
+  }
 
   private void cargarReferenciasDeViews(View view) {
     informacionTituloText = (TextView) view.findViewById(R.id.informacionTituloText);

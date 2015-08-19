@@ -4,11 +4,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.tourguide.R;
 import com.tourguide.adapters.InformacionTabsAdapter;
+import com.tourguide.fragments.InformacionFragment;
+import com.tourguide.fragments.PostalesFragment;
 import com.tourguide.models.UbicacionTuristica;
 
 
@@ -18,17 +19,10 @@ public class InformacionActivity extends Activity {
   private UbicacionTuristica ubicacion;
 
   @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_informacion, menu);
-    return true;
-  }
-
-  @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     int id = item.getItemId();
 
     return id == R.id.action_settings || super.onOptionsItemSelected(item);
-
   }
 
   public UbicacionTuristica getUbicacion() {
@@ -48,8 +42,12 @@ public class InformacionActivity extends Activity {
   }
 
   private void mostrarTabsEnActionBar() {
+    InformacionTabsAdapter adapter = new InformacionTabsAdapter(getSupportFragmentManager());
+    adapter.añadirFragment(new InformacionFragment(this));
+    adapter.añadirFragment(new PostalesFragment());
+
     viewPager = (ViewPager) findViewById(R.id.viewPager);
-    viewPager.setAdapter(new InformacionTabsAdapter(getSupportFragmentManager()));
+    viewPager.setAdapter(adapter);
 
     ActionBar actionBar = getSupportActionBar();
     actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -89,4 +87,7 @@ public class InformacionActivity extends Activity {
     };
   }
 
+  public int getUbicacionId() {
+    return getIntent().getIntExtra("ubicacionId", 0);
+  }
 }

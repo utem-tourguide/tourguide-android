@@ -22,7 +22,7 @@ import com.squareup.okhttp.Response;
 import com.tourguide.R;
 import com.tourguide.models.Usuario;
 
-public class Login extends ProgressActivity {
+public class LoginActivity extends ProgressActivity {
 
   private UserLoginTask mAuthTask = null;
 
@@ -176,7 +176,7 @@ public class Login extends ProgressActivity {
     }
 
     protected void launchMainActivity() {
-      mContext.startActivity(new Intent(this.mContext, Main.class));
+      mContext.startActivity(new Intent(this.mContext, MainActivity.class));
     }
   }
 }

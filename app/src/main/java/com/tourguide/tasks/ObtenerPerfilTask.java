@@ -3,16 +3,16 @@ package com.tourguide.tasks;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 
-import com.tourguide.activities.Perfil;
+import com.tourguide.activities.PerfilActivity;
 import com.tourguide.factories.UsuariosFactory;
 import com.tourguide.models.Usuario;
 
 public class ObtenerPerfilTask extends AsyncTask<Void, Void, Usuario> {
 
-  private int usuarioId;
-  private Perfil actividad;
+  private int            usuarioId;
+  private PerfilActivity actividad;
 
-  public ObtenerPerfilTask(int usuarioId, Perfil actividad) {
+  public ObtenerPerfilTask(int usuarioId, PerfilActivity actividad) {
     this.usuarioId = usuarioId;
     this.actividad = actividad;
   }

@@ -13,16 +13,16 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.tourguide.activities.Main"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.tourguide.activities.Login"
+            android:name=".activities.LoginActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
-            android:name=".activities.Perfil"
+            android:name=".activities.PerfilActivity"
             android:label="@string/title_activity_datos_usuario" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,10 +31,10 @@
             </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.tourguide.activities.Main" />
+                android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name="com.tourguide.activities.Informacion"
+            android:name=".activities.InformacionActivity"
             android:label="@string/title_activity_informacion" >
         </activity>
     </application>

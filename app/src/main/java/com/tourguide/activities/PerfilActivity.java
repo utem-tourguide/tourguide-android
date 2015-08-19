@@ -11,7 +11,7 @@ import android.widget.Spinner;
 import com.tourguide.R;
 import com.tourguide.tasks.ObtenerPerfilTask;
 
-public class Perfil extends ProgressActivity {
+public class PerfilActivity extends ProgressActivity {
 
   private static final int USUARIO_ID = 1;
 

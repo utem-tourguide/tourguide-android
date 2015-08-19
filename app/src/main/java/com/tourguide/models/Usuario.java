@@ -7,14 +7,7 @@ import com.tourguide.support.Constants;
  */
 public class Usuario extends Model {
 
-  public static final String[] atributos = {
-    "nombre",
-    "apellido",
-    "email",
-    "contrasena",
-    "contrasena_confirmation",
-    "idioma"
-  };
+  private static final String[] CLAVES_IDIOMAS = { "es", "en", "fr" };
 
   private String email;
   private String nombre;
@@ -51,6 +44,10 @@ public class Usuario extends Model {
 
   public void setIdioma(String idioma) {
     this.idioma = idioma;
+  }
+
+  public void setIdioma(int idiomaId) {
+    this.idioma = CLAVES_IDIOMAS[idiomaId];
   }
 
   public String getUrlParaModificar() {

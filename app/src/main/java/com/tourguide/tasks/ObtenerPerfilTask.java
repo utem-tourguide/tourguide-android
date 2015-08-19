@@ -2,6 +2,7 @@ package com.tourguide.tasks;
 
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.tourguide.activities.PerfilActivity;
 import com.tourguide.factories.UsuariosFactory;
@@ -34,12 +35,18 @@ public class ObtenerPerfilTask extends AsyncTask<Void, Void, Usuario> {
 
     actividad.mostrarProgreso(false);
 
-    actividad.nombre.setText(usuario.getNombre());
-    actividad.apellido.setText(usuario.getApellido());
-    actividad.email.setText(usuario.getEmail());
+    if (usuario == null) {
+      Toast.makeText(actividad, "No se pudo cargar el perfil.", Toast.LENGTH_SHORT).show();
+    } else {
+      actividad.nombre.setText(usuario.getNombre());
+      actividad.apellido.setText(usuario.getApellido());
+      actividad.email.setText(usuario.getEmail());
 
-    int posicion = obtenerPosicionDeIdioma(usuario.getIdioma());
-    actividad.idioma.setSelection(posicion);
+      int posicion = obtenerPosicionDeIdioma(usuario.getIdioma());
+      actividad.idioma.setSelection(posicion);
+    }
+
+    actividad.setUsuario(usuario);
   }
 
   private int obtenerPosicionDeIdioma(String idioma) {

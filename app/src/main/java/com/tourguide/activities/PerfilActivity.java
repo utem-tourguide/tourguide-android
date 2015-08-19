@@ -9,11 +9,13 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.tourguide.R;
+import com.tourguide.models.Usuario;
+import com.tourguide.tasks.ModificarPerfilTask;
 import com.tourguide.tasks.ObtenerPerfilTask;
 
 public class PerfilActivity extends ProgressActivity {
 
-  private static final int USUARIO_ID = 1;
+  private static final int USUARIO_ID = 10;
 
   public EditText nombre;
   public EditText apellido;
@@ -21,6 +23,8 @@ public class PerfilActivity extends ProgressActivity {
   public EditText contraseña;
   public EditText contraseña_confirmation;
   public Spinner  idioma;
+
+  private Usuario usuario;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +68,15 @@ public class PerfilActivity extends ProgressActivity {
    * @param item
    */
   public void onGuardarItemClick(MenuItem item) {
+    if (usuario == null) return;
 
+    usuario.setEmail(email.getText().toString());
+    usuario.setNombre(nombre.getText().toString());
+    usuario.setApellido(apellido.getText().toString());
+    usuario.setIdioma(idioma.getSelectedItemPosition());
+
+    ModificarPerfilTask tarea = new ModificarPerfilTask(usuario, this);
+    tarea.execute();
   }
 
   @Override
@@ -77,4 +89,11 @@ public class PerfilActivity extends ProgressActivity {
     return (ProgressBar) findViewById(R.id.perfil_progress);
   }
 
+  public Usuario getUsuario() {
+    return usuario;
+  }
+
+  public void setUsuario(Usuario usuario) {
+    this.usuario = usuario;
+  }
 }

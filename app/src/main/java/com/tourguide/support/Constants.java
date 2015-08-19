@@ -6,6 +6,6 @@ package com.tourguide.support;
  */
 public class Constants {
 
-  public static final String BACKEND_URL = "http://tourguide-admin.herokuapp.com";
+  public static final String BACKEND_URL = "http://10.0.2.2:8000";
 
 }

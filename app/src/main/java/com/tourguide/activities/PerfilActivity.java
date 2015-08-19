@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import com.tourguide.R;
 import com.tourguide.handlers.BackendResponseHandler;
 import com.tourguide.handlers.ModificarPerfilSuccessHandler;
+import com.tourguide.handlers.ModificarPerfilUnprocessableHandler;
 import com.tourguide.models.Usuario;
 import com.tourguide.tasks.ModificarPerfilTask;
 import com.tourguide.tasks.ObtenerPerfilTask;
@@ -21,12 +22,12 @@ public class PerfilActivity extends ProgressActivity {
 
   private static final int USUARIO_ID = 10;
 
-  public EditText nombre;
-  public EditText apellido;
-  public EditText email;
-  public EditText contraseña;
-  public EditText contraseña_confirmation;
-  public Spinner  idioma;
+  private EditText nombreInput;
+  private EditText apellidoInput;
+  private EditText emailInput;
+  private EditText contraseñaInput;
+  private EditText contraseñaConfirmationInput;
+  private Spinner  idiomaInput;
 
   private Usuario usuario;
 
@@ -53,12 +54,12 @@ public class PerfilActivity extends ProgressActivity {
   }
 
   private void cargarReferencias() {
-    nombre = (EditText) findViewById(R.id.nombre);
-    apellido = (EditText) findViewById(R.id.apellido);
-    email = (EditText) findViewById(R.id.email);
-    contraseña = (EditText) findViewById(R.id.contrasena);
-    contraseña_confirmation = (EditText) findViewById(R.id.contrasena_confirmation);
-    idioma = (Spinner) findViewById(R.id.idioma);
+    nombreInput = (EditText) findViewById(R.id.nombre);
+    apellidoInput = (EditText) findViewById(R.id.apellido);
+    emailInput = (EditText) findViewById(R.id.email);
+    contraseñaInput = (EditText) findViewById(R.id.contrasena);
+    contraseñaConfirmationInput = (EditText) findViewById(R.id.contrasena_confirmation);
+    idiomaInput = (Spinner) findViewById(R.id.idioma);
   }
 
   private void cargarPerfil() {
@@ -99,17 +100,42 @@ public class PerfilActivity extends ProgressActivity {
     this.usuario = usuario;
   }
 
+  public EditText getNombreInput() {
+    return nombreInput;
+  }
+
+  public EditText getApellidoInput() {
+    return apellidoInput;
+  }
+
+  public EditText getEmailInput() {
+    return emailInput;
+  }
+
+  public EditText getContraseñaInput() {
+    return contraseñaInput;
+  }
+
+  public EditText getContraseñaConfirmationInput() {
+    return contraseñaConfirmationInput;
+  }
+
+  public Spinner getIdiomaInput() {
+    return idiomaInput;
+  }
+
   private void actualizarUsuario() {
-    usuario.setEmail(email.getText().toString());
-    usuario.setNombre(nombre.getText().toString());
-    usuario.setApellido(apellido.getText().toString());
-    usuario.setIdioma(idioma.getSelectedItemPosition());
+    usuario.setEmail(getEmailInput().getText().toString());
+    usuario.setNombre(getNombreInput().getText().toString());
+    usuario.setApellido(getApellidoInput().getText().toString());
+    usuario.setIdioma(getIdiomaInput().getSelectedItemPosition());
   }
 
   private HashMap generarHandlersParaModificar() {
     HashMap<Integer, BackendResponseHandler> handlers = new HashMap<>();
 
     handlers.put(200, new ModificarPerfilSuccessHandler(this));
+    handlers.put(422, new ModificarPerfilUnprocessableHandler(this));
 
     return handlers;
   }

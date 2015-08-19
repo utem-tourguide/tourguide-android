@@ -38,12 +38,12 @@ public class ObtenerPerfilTask extends AsyncTask<Void, Void, Usuario> {
     if (usuario == null) {
       Toast.makeText(actividad, "No se pudo cargar el perfil.", Toast.LENGTH_SHORT).show();
     } else {
-      actividad.nombre.setText(usuario.getNombre());
-      actividad.apellido.setText(usuario.getApellido());
-      actividad.email.setText(usuario.getEmail());
+      actividad.getNombreInput().setText(usuario.getNombre());
+      actividad.getApellidoInput().setText(usuario.getApellido());
+      actividad.getEmailInput().setText(usuario.getEmail());
 
       int posicion = obtenerPosicionDeIdioma(usuario.getIdioma());
-      actividad.idioma.setSelection(posicion);
+      actividad.getIdiomaInput().setSelection(posicion);
     }
 
     actividad.setUsuario(usuario);

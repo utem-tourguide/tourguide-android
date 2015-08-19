@@ -6,8 +6,8 @@ import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
 import com.tourguide.activities.PerfilActivity;
+import com.tourguide.backend.Response;
 import com.tourguide.handlers.BackendResponseHandler;
 import com.tourguide.models.Usuario;
 
@@ -47,17 +47,28 @@ public class ModificarPerfilTask extends AsyncTask<Void, Void, Response> {
   }
 
   @Override
-  protected void onPostExecute(Response respuesta) {
-    System.out.println("Información enviada. Procesando respuesta.");
+  protected Response doInBackground(Void... params) {
+    com.squareup.okhttp.Response respuestaHttp = ejecutarPeticion(generarRequest());
+    Response respuesta = null;
 
-    handlers.get(respuesta.code()).handle();
+    try {
+      respuesta = new Response(respuestaHttp.code(), respuestaHttp.body().string());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
-    actividad.finish();
+    return respuesta;
   }
 
   @Override
-  protected Response doInBackground(Void... params) {
-    return ejecutarPeticion(generarRequest());
+  protected void onPostExecute(Response respuesta) {
+    System.out.println("Información enviada. Procesando respuesta.");
+
+    actividad.mostrarProgreso(false);
+
+    BackendResponseHandler handler = handlers.get(respuesta.getStatus());
+    handler.setResponse(respuesta);
+    handler.handle();
   }
 
   private Request generarRequest() {
@@ -67,8 +78,8 @@ public class ModificarPerfilTask extends AsyncTask<Void, Void, Response> {
                                 .build();
   }
 
-  private Response ejecutarPeticion(Request request) {
-    Response respuesta = null;
+  private com.squareup.okhttp.Response ejecutarPeticion(Request request) {
+    com.squareup.okhttp.Response respuesta = null;
 
     try {
       respuesta = new OkHttpClient().newCall(request).execute();

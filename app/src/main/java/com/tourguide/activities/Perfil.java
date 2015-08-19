@@ -1,16 +1,17 @@
 package com.tourguide.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.tourguide.R;
 import com.tourguide.tasks.ObtenerPerfilTask;
 
-public class Perfil extends Activity {
+public class Perfil extends ProgressActivity {
 
   private static final int USUARIO_ID = 1;
 
@@ -64,6 +65,16 @@ public class Perfil extends Activity {
    */
   public void onGuardarItemClick(MenuItem item) {
 
+  }
+
+  @Override
+  public View getEscondible() {
+    return findViewById(R.id.perfil_layout);
+  }
+
+  @Override
+  public ProgressBar getProgressBar() {
+    return (ProgressBar) findViewById(R.id.perfil_progress);
   }
 
 }

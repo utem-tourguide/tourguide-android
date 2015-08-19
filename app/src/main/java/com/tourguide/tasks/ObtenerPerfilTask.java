@@ -18,6 +18,11 @@ public class ObtenerPerfilTask extends AsyncTask<Void, Void, Usuario> {
   }
 
   @Override
+  protected void onPreExecute() {
+    actividad.mostrarProgreso(true);
+  }
+
+  @Override
   protected Usuario doInBackground(Void... params) {
     System.out.println("Obteniendo perfil de usuario con id " + usuarioId + ".");
     return UsuariosFactory.construirConId(usuarioId);
@@ -26,6 +31,8 @@ public class ObtenerPerfilTask extends AsyncTask<Void, Void, Usuario> {
   @Override
   protected void onPostExecute(Usuario usuario) {
     System.out.println("Perfil obtenido. Mostrando perfil en pantalla.");
+
+    actividad.mostrarProgreso(false);
 
     actividad.nombre.setText(usuario.getNombre());
     actividad.apellido.setText(usuario.getApellido());

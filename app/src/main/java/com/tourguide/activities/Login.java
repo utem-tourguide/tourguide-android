@@ -1,13 +1,8 @@
 package com.tourguide.activities;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -15,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -26,7 +22,7 @@ import com.squareup.okhttp.Response;
 import com.tourguide.R;
 import com.tourguide.models.Usuario;
 
-public class Login extends Activity {
+public class Login extends ProgressActivity {
 
   private UserLoginTask mAuthTask = null;
 
@@ -68,7 +64,7 @@ public class Login extends Activity {
     if (cancel) {
       focusView.requestFocus();
     } else {
-      showProgress(true);
+      mostrarProgreso(true);
       mAuthTask = new UserLoginTask(email, password, this);
       mAuthTask.execute((Void) null);
     }
@@ -110,32 +106,14 @@ public class Login extends Activity {
     return password.length() > 4;
   }
 
-  @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-  public void showProgress(final boolean show) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-      int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+  @Override
+  public View getEscondible() {
+    return mLoginFormView;
+  }
 
-      mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-      mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-        show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-        @Override
-        public void onAnimationEnd(Animator animation) {
-          mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
-      });
-
-      mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-      mProgressView.animate().setDuration(shortAnimTime).alpha(
-        show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-        @Override
-        public void onAnimationEnd(Animator animation) {
-          mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-        }
-      });
-    } else {
-      mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-      mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-    }
+  @Override
+  public ProgressBar getProgressBar() {
+    return (ProgressBar) mProgressView;
   }
 
   private class UserLoginTask extends AsyncTask<Void, Void, Integer> {
@@ -181,7 +159,7 @@ public class Login extends Activity {
     @Override
     protected void onPostExecute(final Integer userId) {
       mAuthTask = null;
-      showProgress(false);
+      mostrarProgreso(false);
 
       if (userId != null) {
         launchMainActivity();
@@ -194,7 +172,7 @@ public class Login extends Activity {
     @Override
     protected void onCancelled() {
       mAuthTask = null;
-      showProgress(false);
+      mostrarProgreso(false);
     }
 
     protected void launchMainActivity() {

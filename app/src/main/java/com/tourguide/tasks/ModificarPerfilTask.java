@@ -1,7 +1,6 @@
 package com.tourguide.tasks;
 
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
@@ -9,11 +8,13 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.tourguide.activities.PerfilActivity;
+import com.tourguide.handlers.BackendResponseHandler;
 import com.tourguide.models.Usuario;
 
 import java.io.IOException;
+import java.util.HashMap;
 
-public class ModificarPerfilTask extends AsyncTask<Void, Void, Boolean> {
+public class ModificarPerfilTask extends AsyncTask<Void, Void, Response> {
 
   private static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; chaset=utf8");
 
@@ -27,9 +28,15 @@ public class ModificarPerfilTask extends AsyncTask<Void, Void, Boolean> {
    */
   private PerfilActivity actividad;
 
-  public ModificarPerfilTask(Usuario usuario, PerfilActivity actividad) {
+  /**
+   * Manejadores de respuestas del backend.
+   */
+  private HashMap<Integer, BackendResponseHandler> handlers;
+
+  public ModificarPerfilTask(Usuario usuario, PerfilActivity actividad, HashMap<Integer, BackendResponseHandler> handlers) {
     this.usuario = usuario;
     this.actividad = actividad;
+    this.handlers = handlers;
   }
 
   @Override
@@ -40,20 +47,17 @@ public class ModificarPerfilTask extends AsyncTask<Void, Void, Boolean> {
   }
 
   @Override
-  protected void onPostExecute(Boolean exito) {
+  protected void onPostExecute(Response respuesta) {
     System.out.println("Información enviada. Procesando respuesta.");
 
-    actividad.mostrarProgreso(false);
-
-    String mensaje = exito ? "Perfil guardado" : "No se pudo guardar el perfil";
-    Toast.makeText(actividad, mensaje, Toast.LENGTH_SHORT).show();
+    handlers.get(respuesta.code()).handle();
 
     actividad.finish();
   }
 
   @Override
-  protected Boolean doInBackground(Void... params) {
-    return ejecutarRequest(generarRequest());
+  protected Response doInBackground(Void... params) {
+    return ejecutarPeticion(generarRequest());
   }
 
   private Request generarRequest() {
@@ -63,23 +67,16 @@ public class ModificarPerfilTask extends AsyncTask<Void, Void, Boolean> {
                                 .build();
   }
 
-  private Boolean ejecutarRequest(Request request) {
-    Response response;
+  private Response ejecutarPeticion(Request request) {
+    Response respuesta = null;
 
     try {
-      response = new OkHttpClient().newCall(request).execute();
-      if (response.isSuccessful()) {
-        return true;
-      } else {
-        System.out.println("Ocurrió un error al intentar guardar el perfil.");
-        System.out.println(response.body().string());
-        return false;
-      }
+      respuesta = new OkHttpClient().newCall(request).execute();
     } catch (IOException e) {
       e.printStackTrace();
     }
 
-    return false;
+    return respuesta;
   }
 
 }

@@ -9,9 +9,13 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.tourguide.R;
+import com.tourguide.handlers.BackendResponseHandler;
+import com.tourguide.handlers.ModificarPerfilSuccessHandler;
 import com.tourguide.models.Usuario;
 import com.tourguide.tasks.ModificarPerfilTask;
 import com.tourguide.tasks.ObtenerPerfilTask;
+
+import java.util.HashMap;
 
 public class PerfilActivity extends ProgressActivity {
 
@@ -70,12 +74,10 @@ public class PerfilActivity extends ProgressActivity {
   public void onGuardarItemClick(MenuItem item) {
     if (usuario == null) return;
 
-    usuario.setEmail(email.getText().toString());
-    usuario.setNombre(nombre.getText().toString());
-    usuario.setApellido(apellido.getText().toString());
-    usuario.setIdioma(idioma.getSelectedItemPosition());
+    actualizarUsuario();
+    HashMap handlers = generarHandlersParaModificar();
 
-    ModificarPerfilTask tarea = new ModificarPerfilTask(usuario, this);
+    ModificarPerfilTask tarea = new ModificarPerfilTask(usuario, this, handlers);
     tarea.execute();
   }
 
@@ -96,4 +98,20 @@ public class PerfilActivity extends ProgressActivity {
   public void setUsuario(Usuario usuario) {
     this.usuario = usuario;
   }
+
+  private void actualizarUsuario() {
+    usuario.setEmail(email.getText().toString());
+    usuario.setNombre(nombre.getText().toString());
+    usuario.setApellido(apellido.getText().toString());
+    usuario.setIdioma(idioma.getSelectedItemPosition());
+  }
+
+  private HashMap generarHandlersParaModificar() {
+    HashMap<Integer, BackendResponseHandler> handlers = new HashMap<>();
+
+    handlers.put(200, new ModificarPerfilSuccessHandler(this));
+
+    return handlers;
+  }
+
 }

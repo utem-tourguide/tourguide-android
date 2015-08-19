@@ -23,9 +23,8 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
-
 import com.tourguide.R;
-import com.tourguide.models.User;
+import com.tourguide.models.Usuario;
 
 public class Login extends Activity {
 
@@ -168,8 +167,8 @@ public class Login extends Activity {
 
         Response response = client.newCall(request).execute();
         if (response.isSuccessful()) {
-          User user = new Gson().fromJson(response.body().charStream(), User.class);
-          return user.getId();
+          Usuario usuario = new Gson().fromJson(response.body().charStream(), Usuario.class);
+          return usuario.getId();
         } else {
           return null;
         }

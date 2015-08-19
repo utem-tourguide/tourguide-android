@@ -5,17 +5,17 @@ package com.tourguide.models;
  */
 abstract public class Model {
 
-    /**
-     * Identificador único del modelo.
-     */
-    private int id;
+  /**
+   * Identificador único del modelo.
+   */
+  private int id;
 
-    public int getId() {
-        return id;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
 }

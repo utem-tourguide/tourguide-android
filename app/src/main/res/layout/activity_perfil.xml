@@ -83,6 +83,7 @@
             android:text="Idioma preferido"/>
 
         <Spinner
+            android:id="@+id/idioma"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/idiomas"/>

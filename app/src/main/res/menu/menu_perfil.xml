@@ -2,6 +2,7 @@
 
     <item android:title="Guardar"
           android:showAsAction="always"
-          android:icon="@android:drawable/ic_menu_save" />
+          android:icon="@android:drawable/ic_menu_save"
+          android:onClick="onGuardarItemClick"/>
 
 </menu>

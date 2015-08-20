@@ -1,29 +1,32 @@
 package com.tourguide.adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import com.tourguide.R;
+import com.tourguide.managers.DrawableManager;
+import com.tourguide.models.Postal;
 
-import java.util.List;
+public class PostalesAdapter extends ArrayAdapter<Postal> {
 
-public class PostalesAdapter extends ArrayAdapter<Bitmap> {
-
-  public PostalesAdapter(Context context, List<Bitmap> bitmaps) {
-    super(context, R.layout.partial_postal, bitmaps);
+  public PostalesAdapter(Context context, Postal[] postales) {
+    super(context, R.layout.partial_postal, postales);
   }
 
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
-    ImageView view = (ImageView) convertView;
+    if (convertView == null) {
+      convertView = View.inflate(getContext(), R.layout.partial_postal, null);
+    }
 
-    view.setImageBitmap(getItem(position));
+    // La imagen de la postal se cargará desde Internet en segundo plano.
+    Postal postal = getItem(position);
+    DrawableManager.getInstance().fetchDrawableOnThread(postal.getUrlParaDescargar(), (ImageView) convertView);
 
-    return view;
+    return convertView;
   }
+
 }

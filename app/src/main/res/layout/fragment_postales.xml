@@ -15,11 +15,14 @@
                  android:layout_centerInParent="true"
                  android:visibility="gone"/>
 
-    <ListView
+    <GridView
         android:id="@+id/postalesLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:columnWidth="90dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth">
 
-    </ListView>
+    </GridView>
 
 </RelativeLayout>

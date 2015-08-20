@@ -38,7 +38,7 @@ public class InformacionActivity extends Activity {
   private void mostrarTabsEnActionBar() {
     InformacionTabsAdapter adapter = new InformacionTabsAdapter(getSupportFragmentManager());
     adapter.añadirFragment(new InformacionFragment(this));
-    adapter.añadirFragment(new PostalesFragment());
+    adapter.añadirFragment(new PostalesFragment(this));
 
     viewPager = (ViewPager) findViewById(R.id.viewPager);
     viewPager.setAdapter(adapter);

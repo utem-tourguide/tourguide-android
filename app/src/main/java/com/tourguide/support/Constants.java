@@ -10,7 +10,7 @@ public class Constants {
 
   private static Usuario usuario;
 
-  public static final String BACKEND_URL = "http://192.168.42.229:8000";
+  public static final String BACKEND_URL = "http://192.168.1.68:8000";
 
   public static synchronized Usuario getUsuario() {
     return usuario;

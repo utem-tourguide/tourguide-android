@@ -14,6 +14,8 @@ import com.tourguide.models.UbicacionTuristica;
 
 public class InformacionActivity extends Activity {
 
+  public static final int TEST_UBICACION_ID = 1;
+
   private ViewPager viewPager;
   private UbicacionTuristica ubicacion;
 
@@ -80,6 +82,8 @@ public class InformacionActivity extends Activity {
   }
 
   public int getUbicacionId() {
-    return getIntent().getIntExtra("ubicacionId", 0);
+    int ubicacionId = getIntent().getIntExtra("ubicacionId", 0);
+
+    return ubicacionId > 0 ? ubicacionId : TEST_UBICACION_ID;
   }
 }

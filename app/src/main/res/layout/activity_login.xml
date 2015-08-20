@@ -8,17 +8,11 @@
                 tools:context="com.tourguide.activities.LoginActivity">
 
     <ProgressBar android:id="@+id/login_progress"
-                 style="?android:attr/progressBarStyleLarge"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_marginBottom="8dp"
-                 android:visibility="gone"
-                 android:layout_alignParentStart="true"
-                 android:layout_alignParentLeft="true"
-                 android:layout_marginStart="0dp"
-                 android:layout_marginLeft="0dp"
-                 android:layout_alignParentTop="true"
-                 android:layout_marginTop="0dp" />
+               style="?android:attr/progressBarStyleLarge"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_centerInParent="true"
+               android:visibility="gone"/>
 
     <LinearLayout android:id="@+id/login_form"
                   android:layout_width="match_parent"
@@ -29,7 +23,7 @@
                   android:layout_marginTop="15sp">
 
         <ImageView
-            android:layout_width="140dp"
+            android:layout_width="140sp"
             android:layout_height="wrap_content"
             android:id="@+id/logo"
             android:src="@mipmap/logo"

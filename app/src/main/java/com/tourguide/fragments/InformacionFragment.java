@@ -2,6 +2,7 @@ package com.tourguide.fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.tourguide.R;
 import com.tourguide.activities.InformacionActivity;
 import com.tourguide.handlers.BackendResponseHandler;
+import com.tourguide.handlers.ObtenerInfoUbicacionErrorHandler;
 import com.tourguide.handlers.ObtenerInfoUbicacionSuccessHandler;
 import com.tourguide.tasks.ObtenerInfoUbicacionTask;
 
@@ -48,14 +50,21 @@ public class InformacionFragment extends ProgressFragment {
   public void onStart() {
     super.onStart();
 
-    Map<Boolean, BackendResponseHandler> handlers = new HashMap<>();
-    handlers.put(true, new ObtenerInfoUbicacionSuccessHandler(actividad, this));
-
     ObtenerInfoUbicacionTask tarea = new ObtenerInfoUbicacionTask(actividad.getUbicacionId(),
                                                                   actividad,
                                                                   this,
-                                                                  handlers);
+                                                                  generarHandlers());
     tarea.execute();
+  }
+
+  @NonNull
+  private Map<Boolean, BackendResponseHandler> generarHandlers() {
+    Map<Boolean, BackendResponseHandler> handlers = new HashMap<>();
+
+    handlers.put(true, new ObtenerInfoUbicacionSuccessHandler(actividad, this));
+    handlers.put(false, new ObtenerInfoUbicacionErrorHandler(actividad));
+
+    return handlers;
   }
 
   private void cargarReferenciasDeViews(View view) {

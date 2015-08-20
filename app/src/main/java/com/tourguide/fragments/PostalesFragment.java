@@ -1,14 +1,14 @@
 package com.tourguide.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.tourguide.R;
 
-public class PostalesFragment extends Fragment {
+public class PostalesFragment extends ProgressFragment {
 
   public PostalesFragment() {
   }
@@ -18,5 +18,15 @@ public class PostalesFragment extends Fragment {
                            Bundle savedInstanceState) {
 
     return inflater.inflate(R.layout.fragment_postales, container, false);
+  }
+
+  @Override
+  public View getEscondible() {
+    return getView().findViewById(R.id.postalesLayout);
+  }
+
+  @Override
+  public ProgressBar getProgressBar() {
+    return (ProgressBar) getView().findViewById(R.id.postalesProgress);
   }
 }

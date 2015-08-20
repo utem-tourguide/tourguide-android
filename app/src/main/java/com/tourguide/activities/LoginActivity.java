@@ -1,5 +1,7 @@
 package com.tourguide.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -14,6 +16,9 @@ import com.tourguide.R;
 import com.tourguide.handlers.BackendResponseHandler;
 import com.tourguide.handlers.IniciarSesionErrorHandler;
 import com.tourguide.handlers.IniciarSesionSuccessHandler;
+import com.tourguide.managers.LoginManager;
+import com.tourguide.models.Usuario;
+import com.tourguide.support.Constants;
 import com.tourguide.tasks.IniciarSesionTask;
 
 import java.util.HashMap;
@@ -112,6 +117,17 @@ public class LoginActivity extends ProgressActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    LoginManager.initialize(getSharedPreferences("tourguide", Context.MODE_PRIVATE));
+
+    if (LoginManager.hasLoginId()) {
+      procederConSesionRecordada(LoginManager.getLoginId());
+    } else {
+      procederConFormularioLogin();
+    }
+  }
+
+  private void procederConFormularioLogin() {
     setContentView(R.layout.activity_login);
 
     emailInput = (EditText) findViewById(R.id.email);
@@ -135,6 +151,15 @@ public class LoginActivity extends ProgressActivity {
 
     loginForm = findViewById(R.id.login_form);
     progressBar = findViewById(R.id.login_progress);
+  }
+
+  private void procederConSesionRecordada(int id) {
+    Usuario usuario = new Usuario();
+    usuario.setId(id);
+
+    Constants.setUsuario(usuario);
+
+    startActivity(new Intent(this, MainActivity.class));
   }
 
   private boolean isEmailValid(String email) {

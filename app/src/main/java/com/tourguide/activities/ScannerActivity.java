@@ -16,7 +16,7 @@ public class ScannerActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_scanner, menu);
         return true;
     }
 
@@ -27,7 +27,7 @@ public class ScannerActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_scanner);
 
         inicializarScanner();
     }

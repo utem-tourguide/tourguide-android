@@ -2,6 +2,7 @@ package com.tourguide.handlers;
 
 import com.tourguide.activities.InformacionActivity;
 import com.tourguide.fragments.InformacionFragment;
+import com.tourguide.models.Informacion;
 import com.tourguide.models.UbicacionTuristica;
 
 public class ObtenerInfoUbicacionSuccessHandler extends BackendResponseHandler {
@@ -22,6 +23,10 @@ public class ObtenerInfoUbicacionSuccessHandler extends BackendResponseHandler {
 
     fragment.getInformacionTituloText().setText(ubicacion.getNombre());
     fragment.getInformacionLocalizacionText().setText(ubicacion.getLocalizacion());
+
+    // TODO: Mostrar información en el idioma preferido del usuario.
+    Informacion informacion = ubicacion.getInformacionEnIdioma("es");
+    fragment.getInformacionContenidoText().setText(informacion.getContenido());
   }
 
 }

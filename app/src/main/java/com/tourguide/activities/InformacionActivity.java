@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.view.MenuItem;
 
 import com.tourguide.R;
 import com.tourguide.adapters.InformacionTabsAdapter;
@@ -17,13 +16,6 @@ public class InformacionActivity extends Activity {
 
   private ViewPager viewPager;
   private UbicacionTuristica ubicacion;
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    int id = item.getItemId();
-
-    return id == R.id.action_settings || super.onOptionsItemSelected(item);
-  }
 
   public UbicacionTuristica getUbicacion() {
     return ubicacion;

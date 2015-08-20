@@ -7,7 +7,7 @@ import com.tourguide.support.Constants;
  */
 public class Usuario extends Model {
 
-  private static final String[] CLAVES_IDIOMAS = { "es", "en", "fr" };
+  public static final String[] CLAVES_IDIOMAS = { "es", "en", "fr" };
 
   private String email;
   private String nombre;

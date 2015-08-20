@@ -16,6 +16,7 @@ import com.tourguide.handlers.ObtenerPerfilErrorHandler;
 import com.tourguide.handlers.ObtenerPerfilSuccessHandler;
 import com.tourguide.support.Constants;
 import com.tourguide.tasks.ModificarPerfilTask;
+import com.tourguide.tasks.ObtenerPerfilTask;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,7 +62,12 @@ public class PerfilActivity extends ProgressActivity {
   }
 
   private void cargarPerfil() {
-    new ObtenerPerfilSuccessHandler(this).handle();
+    Map<Boolean, BackendResponseHandler> handlers = generarHandlersParaObtener();
+
+    ObtenerPerfilTask tarea = new ObtenerPerfilTask(Constants.getUsuario().getId(),
+                                                    this,
+                                                    handlers);
+    tarea.execute();
   }
 
   /**
@@ -120,7 +126,7 @@ public class PerfilActivity extends ProgressActivity {
     Constants.getUsuario().setIdioma(getIdiomaInput().getSelectedItemPosition());
   }
 
-  private Map generarHandlersParaObtener() {
+  private Map<Boolean, BackendResponseHandler> generarHandlersParaObtener() {
     Map<Boolean, BackendResponseHandler> handlers = new HashMap<>();
 
     handlers.put(true, new ObtenerPerfilSuccessHandler(this));
@@ -129,7 +135,7 @@ public class PerfilActivity extends ProgressActivity {
     return handlers;
   }
 
-  private Map generarHandlersParaModificar() {
+  private Map<Integer, BackendResponseHandler> generarHandlersParaModificar() {
     Map<Integer, BackendResponseHandler> handlers = new HashMap<>();
 
     handlers.put(200, new ModificarPerfilSuccessHandler(this));

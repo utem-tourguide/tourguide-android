@@ -159,7 +159,7 @@ public class LoginActivity extends ProgressActivity {
 
     Constants.setUsuario(usuario);
 
-    startActivity(new Intent(this, MainActivity.class));
+    startActivity(new Intent(this, ScannerActivity.class));
   }
 
   private boolean isEmailValid(String email) {

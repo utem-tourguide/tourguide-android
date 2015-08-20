@@ -10,7 +10,7 @@ import com.tourguide.listeners.QRScannerListener;
 
 import eu.livotov.zxscan.ScannerView;
 
-public class MainActivity extends Activity {
+public class ScannerActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

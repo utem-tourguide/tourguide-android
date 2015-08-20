@@ -13,7 +13,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.ScannerActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
@@ -31,7 +31,7 @@
             android:label="@string/title_activity_perfil" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MainActivity" />
+                android:value=".activities.ScannerActivity" />
         </activity>
         <activity
             android:name=".activities.InformacionActivity"

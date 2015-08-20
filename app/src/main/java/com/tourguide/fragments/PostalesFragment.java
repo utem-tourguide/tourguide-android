@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.tourguide.R;
@@ -15,7 +15,7 @@ import com.tourguide.tasks.ObtenerPostalesTask;
 public class PostalesFragment extends ProgressFragment {
 
   private InformacionActivity actividad;
-  private GridView postalesGrid;
+  private ListView postalesGrid;
 
   public PostalesFragment() {
   }
@@ -52,12 +52,12 @@ public class PostalesFragment extends ProgressFragment {
     return (ProgressBar) getView().findViewById(R.id.postalesProgress);
   }
 
-  public GridView getPostalesGrid() {
+  public ListView getPostalesGrid() {
     return postalesGrid;
   }
 
   private void cargarReferenciasDeViews(View view) {
-    postalesGrid = (GridView) view.findViewById(R.id.postalesLayout);
+    postalesGrid = (ListView) view.findViewById(R.id.postalesLayout);
   }
 
 }

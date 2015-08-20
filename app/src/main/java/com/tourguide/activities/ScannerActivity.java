@@ -12,6 +12,8 @@ import eu.livotov.zxscan.ScannerView;
 
 public class ScannerActivity extends Activity {
 
+    private ScannerView scanner;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -26,19 +28,28 @@ public class ScannerActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        inicializarScanner();
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
 
-        inicializarQRScanner();
+        scanner.startScanner();
     }
 
-    private void inicializarQRScanner() {
-        ScannerView scanner = (ScannerView) findViewById(R.id.scanner);
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        scanner.stopScanner();
+    }
+
+    private void inicializarScanner() {
+        scanner = (ScannerView) findViewById(R.id.scanner);
+        scanner.setPlaySound(true);
         scanner.setScannerViewEventListener(new QRScannerListener(scanner, this));
-        scanner.startScanner();
     }
 
 }

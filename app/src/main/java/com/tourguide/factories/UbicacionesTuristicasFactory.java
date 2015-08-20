@@ -25,15 +25,28 @@ public class UbicacionesTuristicasFactory extends Factory {
   }
 
   private static UbicacionTuristica obtenerUbicacionDesdeBackend(int id) throws IOException {
+    String json = obtenerJSONParaUbicacion(id);
+
+    UbicacionTuristica ubicacion = null;
+    if (json != null) {
+      ubicacion = construirUbicacionDesdeJson(json);
+      ubicacion.setInformacion(obtenerInfoDeUbicacionDesdeBackend(id));
+    }
+
+    return ubicacion;
+  }
+
+  private static String obtenerJSONParaUbicacion(int id) throws IOException {
     Response response = new OkHttpClient().newCall(generarPeticionParaUbicacion(id)).execute();
 
-    UbicacionTuristica ubicacion;
-    if (response.isSuccessful()) {
-      ubicacion = new Gson().fromJson(response.body().charStream(), UbicacionTuristica.class);
-      ubicacion.setInformacion(obtenerInfoDeUbicacionDesdeBackend(id));
-    } else {
-      ubicacion = null;
-    }
+    String body = response.body().string();
+    System.out.println("RESPUESTA: " + body);
+
+    return response.isSuccessful() ? body : null;
+  }
+
+  private static UbicacionTuristica construirUbicacionDesdeJson(String json) throws IOException {
+    UbicacionTuristica ubicacion = new Gson().fromJson(json, UbicacionTuristica.class);
 
     return ubicacion;
   }
@@ -45,13 +58,18 @@ public class UbicacionesTuristicasFactory extends Factory {
   }
 
   private static Informacion[] obtenerInfoDeUbicacionDesdeBackend(int id) throws IOException {
-    Response response = new OkHttpClient().newCall(generarPeticionParaInfoDeUbicacion(id)).execute();
-    Informacion[] info = construirInformacion(response.body().string());
+    Informacion[] info = construirInformacionDesdeJSON(obtenerJSONParaInfoDeUbicacion(id));
 
     return info;
   }
 
-  private static Informacion[] construirInformacion(String json) {
+  private static String obtenerJSONParaInfoDeUbicacion(int id) throws IOException {
+    Response response = new OkHttpClient().newCall(generarPeticionParaInfoDeUbicacion(id)).execute();
+
+    return response.body().string();
+  }
+
+  private static Informacion[] construirInformacionDesdeJSON(String json) {
     Informacion[] info = new Gson().fromJson(json, Informacion[].class);
 
     return info;

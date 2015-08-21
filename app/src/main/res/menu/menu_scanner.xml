@@ -8,4 +8,9 @@
         android:icon="@mipmap/ic_account"
         android:onClick="onPerfilMenuItemClick"/>
 
+    <item android:title="Salir"
+          app:showAsAction="always"
+          android:icon="@android:drawable/ic_lock_power_off"
+          android:onClick="onSalirMenuItemClick"/>
+
 </menu>

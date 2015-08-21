@@ -40,4 +40,7 @@ public class LoginManager {
     return preferences;
   }
 
+  public static void deleteLoginId() {
+    getInstance().getPreferences().edit().remove(LOGIN_ID).commit();
+  }
 }

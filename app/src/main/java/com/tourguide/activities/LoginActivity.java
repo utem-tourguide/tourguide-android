@@ -117,6 +117,7 @@ public class LoginActivity extends ProgressActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_login);
 
     LoginManager.initialize(getSharedPreferences("tourguide", Context.MODE_PRIVATE));
 
@@ -128,8 +129,6 @@ public class LoginActivity extends ProgressActivity {
   }
 
   private void procederConFormularioLogin() {
-    setContentView(R.layout.activity_login);
-
     emailInput = (EditText) findViewById(R.id.email);
 
     contraseñaInput = (EditText) findViewById(R.id.password);
@@ -160,6 +159,7 @@ public class LoginActivity extends ProgressActivity {
     Constants.setUsuario(usuario);
 
     startActivity(new Intent(this, ScannerActivity.class));
+    finish();
   }
 
   private boolean isEmailValid(String email) {

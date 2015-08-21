@@ -7,6 +7,7 @@ import android.view.MenuItem;
 
 import com.tourguide.R;
 import com.tourguide.listeners.QRScannerListener;
+import com.tourguide.managers.LoginManager;
 
 import eu.livotov.zxscan.ScannerView;
 
@@ -50,6 +51,13 @@ public class ScannerActivity extends Activity {
         scanner = (ScannerView) findViewById(R.id.scanner);
         scanner.setPlaySound(true);
         scanner.setScannerViewEventListener(new QRScannerListener(scanner, this));
+    }
+
+    public void onSalirMenuItemClick(MenuItem item) {
+        LoginManager.deleteLoginId();
+
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 
 }

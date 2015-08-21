@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".TGMainActivity">
+
+    <item android:title="@string/title_activity_perfil"
+        app:showAsAction="always"
+        android:icon="@mipmap/ic_account"
+        android:onClick="onPerfilMenuItemClick"/>
+
+    <item android:title="Salir"
+          app:showAsAction="always"
+          android:icon="@android:drawable/ic_lock_power_off"
+          android:onClick="onSalirMenuItemClick"/>
+
+</menu>

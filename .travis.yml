@@ -1,0 +1,28 @@
+language: android
+
+before_install:
+  - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
+
+before_script:
+  - chmod +x launch-android-tests.sh
+
+script:
+  - ./launch-android-tests.sh
+
+android:
+  components:
+    - platform-tools
+    - tools
+
+    # versión build-tools para compilar
+    - build-tools-22.0.1
+    # api para compilar
+    - android-22
+
+    # imágenes para probar en ellas
+    - sys-img-armeabi-v7a-android-15 # ice_cream_sandwich
+    - sys-img-armeabi-v7a-android-16 # jelly_bean
+    - sys-img-armeabi-v7a-android-19 # kitkat
+    - sys-img-armeabi-v7a-android-21 # lollipop
+    - sys-img-armeabi-v7a-android-22 # m

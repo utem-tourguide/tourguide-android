@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TourGuide</string>
+
+    <string name="action_settings">Configuración</string>
+
+    <string name="title_activity_informacion">Información</string>
+
+    <string name="informacion">Información</string>
+    <string name="postales">Postales</string>
+    <string name="title_activity_perfil">Perfil</string>
+</resources>
